@@ -1,0 +1,74 @@
+﻿@model IEnumerable<SonghitsApp.Models.songhit>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Songhit</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<center>
+    <p>
+        @using (Html.BeginForm("Index", "songhit", FormMethod.Get))
+        {
+            <b>Search By:</b>
+            @Html.RadioButton("searchBy", "song", true) <text>Song</text>
+            @Html.RadioButton("searchBy", "artist") <text>Artist</text>
+
+            <br />
+            @Html.TextBox("search") <input type="submit" value="Search" />
+        }
+    </p>
+</center>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.no)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Song)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.artist)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.remarks)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.no)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Song)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.artist)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.remarks)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
